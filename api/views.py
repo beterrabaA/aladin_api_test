@@ -2,6 +2,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema, OpenApiResponse, OpenApiExample, OpenApiParameter, OpenApiTypes
 import requests
+from datetime import datetime
 
 API_URL = "https://testedefensoriapr.pythonanywhere.com/precos"
 
@@ -65,6 +66,14 @@ def items(request):
     if not date:
         return Response(
             {"error": "The 'date' parameter is required."},
+            status=400
+        )
+
+    try:
+        datetime.strptime(date, "%d-%m-%Y")
+    except ValueError:
+        return Response(
+            {"error": "The 'date' parameter must be in the format DD-MM-YYYY."},
             status=400
         )
 
