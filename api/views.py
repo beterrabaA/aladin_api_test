@@ -5,6 +5,9 @@ import requests
 
 API_URL = "https://testedefensoriapr.pythonanywhere.com/precos"
 
+# O código do endpoint foi interamente elaborado por mim. Foi se utilizado IA para auxiliar na criação da documentação do Swagger, detalhando o endpoint, parâmetros e exemplos de resposta para facilitar a compreensão e uso da API pelos consumidores.
+# Um adendo para a documentação do Swagger, detalhando o endpoint, parâmetros e exemplos de resposta para facilitar a compreensão e uso da API pelos consumidores.
+# Endpoint para buscar itens com documentação detalhada para o Swagger
 @extend_schema(
     summary="Endpoint to fetch items.",
     description="This endpoint fetches items for a specific date from an API and returns the data in a JSON format.",
@@ -16,7 +19,6 @@ API_URL = "https://testedefensoriapr.pythonanywhere.com/precos"
             location=OpenApiParameter.QUERY, 
             required=True,
             examples=[
-                    # Exemplo prático para aparecer no Swagger
                     OpenApiExample(
                         name='Exemplo de Data',
                         value='28-05-2026'
@@ -59,8 +61,15 @@ API_URL = "https://testedefensoriapr.pythonanywhere.com/precos"
 )
 @api_view(["GET"])
 def items(request):
-    response = requests.get(API_URL)
     date = request.GET.get("date")
+
+    if not date:
+        return Response(
+            {"error": "The 'date' parameter is required."},
+            status=400
+        )
+
+    response = requests.get(API_URL)
     if response.status_code == 200:
         data =  {
             'date': date,
