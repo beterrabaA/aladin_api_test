@@ -2,11 +2,11 @@
 
 Desafio técnico usando o framework Django para buscar uma API externa, modificar e retornar dados.
 
-### Prerequisites
+### Pré-requisitos
 
 1. `Python` na sua versão 3
 
-### Installation
+### Instalação
 
 1. Clone o repository:
    ```bash
