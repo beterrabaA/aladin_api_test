@@ -1,36 +1,44 @@
 # Aladin Api
 
-Technical challenge using Django framework to fetch an external APi,modify and return a payload.
-
-## Features
-
-- Feature 1: Description of feature.
-- Feature 2: Description of feature.
-- Feature 3: Description of feature.
-
-## Getting Started
+Desafio técnico usando o framework Django para buscar uma API externa, modificar e retornar dados.
 
 ### Prerequisites
 
-```bash
-python 3
-```
+1. `Python` na sua versão 3
 
 ### Installation
 
-1. Clone the repository:
+1. Clone o repository:
    ```bash
    git clone https://github.com/beterrabaA/aladin_api_test
    ```
-2. Install dependencies:
+2. Acessar o diretório:
+    ```bash
+    cd aladin_api_test
+   ```
+3. Instalar as dependências:
    ```bash
    pip install -r requirements.txt 
    ```
-3. Run the application 
+4. Rodar a aplicação: 
     ```bash
     python manage.py runserver
    ```
+   or
+    ```bash
+    python3 manage.py runserver
+   ```
 
-## License
+### Endpoints
 
-This project is licensed under the MIT License.
+- **`GET /api/v1/items/`**: Endpoint principal da aplicação. Responsável por buscar dados na API externa, realizar as modificações da regra de negócio e retornar os dados processados.
+- **`GET /api/v1/schema/`**: Retorna o schema estruturado OpenAPI do projeto (gerado através do `drf-spectacular`).
+- **`GET /api/v1/docs/`**: Disponibiliza a interface gráfica interativa do Swagger UI. Acesse esta rota pelo navegador para explorar a documentação completa da API e realizar testes manuais.
+
+### Testes
+
+Nesse projeto existe testes unitários.Para rodar execute o comando
+
+```bash
+    python manage.py test
+```
