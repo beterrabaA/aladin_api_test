@@ -1,34 +1,63 @@
-from django.http import JsonResponse
-from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
-from drf_spectacular.utils import extend_schema, OpenApiResponse, OpenApiExample
+from drf_spectacular.utils import extend_schema, OpenApiResponse, OpenApiExample, OpenApiParameter, OpenApiTypes
 import requests
 
 API_URL = "https://testedefensoriapr.pythonanywhere.com/precos"
 
 @extend_schema(
-    summary="Example endpoint",
-    description="This endpoint does something specific.",
+    summary="Endpoint to fetch items.",
+    description="This endpoint fetches items for a specific date from an API and returns the data in a JSON format.",
+    parameters=[
+        OpenApiParameter(
+            name="date", 
+            description="The date for which to fetch data", 
+            type=OpenApiTypes.DATE,
+            location=OpenApiParameter.QUERY, 
+            required=True,
+            examples=[
+                    # Exemplo prático para aparecer no Swagger
+                    OpenApiExample(
+                        name='Exemplo de Data',
+                        value='28-05-2026'
+                    )
+                ],
+        )
+    ],
     examples=[OpenApiExample(
-        summary="Example response",
+        name="Successful Response Example",
+        summary="Example of a successful response with data.",
         description="An example of the expected response format.",
         value={
-            "date": "2024-01-01",
+            "date": "28-05-2026",
             "data": [
                 {"id": 1, "name": "Item 1"},
                 {"id": 2, "name": "Item 2"}
             ]
         }
     )],  
-    responses={200: OpenApiResponse(description="Successful response with data",response={
+    responses={
+        200: OpenApiResponse(
+            description="Successful response with data",response={
         'type': 'object',
         'properties': {
             'date': {'type': 'string', 'format': 'date'},
             'data': {'type': 'array', 'items': {'type': 'object'}}
         }
-    })}
+    }),
+        400: OpenApiResponse(description="Response with an error message",response={
+        'type': 'object',
+        'properties': {
+            'error': {'type': 'string'}
+        },
+        'example': {
+            'error': 'Failed to fetch data from the API'
+        }
+    }),
+        500: OpenApiResponse(description="Internal server error")
+    }
 )
+@api_view(["GET"])
 def items(request):
     response = requests.get(API_URL)
     date = request.GET.get("date")
@@ -37,6 +66,9 @@ def items(request):
             'date': date,
             'data': response.json(),
         }
-        return JsonResponse(data)
+        return Response(data)
     else:
-        return JsonResponse({'error': 'Failed to fetch data from the API'}, status=response.status_code)
+        return Response(
+        {"error": "Failed to fetch data from the API"},
+        status=response.status_code
+    )
