@@ -20,11 +20,15 @@ python 3
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/user/project.git
+   git clone https://github.com/beterrabaA/aladin_api_test
    ```
 2. Install dependencies:
    ```bash
-   npm install
+   pip install -r requirements.txt 
+   ```
+3. Run the application 
+    ```bash
+    python manage.py runserver
    ```
 
 ## License
