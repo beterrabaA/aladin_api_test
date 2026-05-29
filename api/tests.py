@@ -40,18 +40,19 @@ class ItemsEndpointTestCase(APITestCase):
         self.assertEqual(response.data['error'], 'Failed to fetch data from the API')
         
     def test_items_missing_date_parameter(self):
+        # 1. Fazer a requisição sem o parâmetro 'date'
         url = '/api/v1/items/'
         response = self.client.get(url)
         
+        # 2. Validações
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data['error'], "The 'date' parameter is required.")
 
     def test_items_invalid_date_format(self):
-        """
-        Testa se a API retorna erro 400 quando o formato da data é inválido.
-        """
+        # 1. Fazer a requisição com um formato de data inválido
         url = '/api/v1/items/'
-        response = self.client.get(url, {'date': '2026/05/28'}) # Passando um formato diferente de DD-MM-YYYY
+        response = self.client.get(url, {'date': '2026/05/28'})
         
+        # 2. Validações
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data['error'], "The 'date' parameter must be in the format DD-MM-YYYY.")
