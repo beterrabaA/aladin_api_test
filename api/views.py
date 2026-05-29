@@ -6,8 +6,7 @@ import requests
 API_URL = "https://testedefensoriapr.pythonanywhere.com/precos"
 
 # O código do endpoint foi interamente elaborado por mim. Foi se utilizado IA para auxiliar na criação da documentação do Swagger, detalhando o endpoint, parâmetros e exemplos de resposta para facilitar a compreensão e uso da API pelos consumidores.
-# Um adendo para a documentação do Swagger, detalhando o endpoint, parâmetros e exemplos de resposta para facilitar a compreensão e uso da API pelos consumidores.
-# Endpoint para buscar itens com documentação detalhada para o Swagger
+# Endpoint para buscar itens
 @extend_schema(
     summary="Endpoint to fetch items.",
     description="This endpoint fetches items for a specific date from an API and returns the data in a JSON format.",
