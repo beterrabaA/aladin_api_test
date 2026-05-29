@@ -31,7 +31,7 @@ Desafio técnico usando o framework Django para buscar uma API externa, modifica
 
 ### Endpoints
 
-- **`GET /api/v1/items/`**: Endpoint principal da aplicação. Responsável por buscar dados na API externa, realizar as modificações da regra de negócio e retornar os dados processados.
+- **`GET /api/v1/items/`**: Endpoint principal da aplicação. Responsável por buscar dados na API externa, realizar as modificações da regra de negócio e retornar os dados processados. Requer um parâmetro de query `date` obrigatório no formato `DD-MM-YYYY` (ex: `?date=28-05-2026`).
 - **`GET /api/v1/schema/`**: Retorna o schema estruturado OpenAPI do projeto (gerado através do `drf-spectacular`).
 - **`GET /api/v1/docs/`**: Disponibiliza a interface gráfica interativa do Swagger UI. Acesse esta rota pelo navegador para explorar a documentação completa da API e realizar testes manuais.
 
